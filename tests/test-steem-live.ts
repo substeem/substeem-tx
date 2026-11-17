@@ -55,8 +55,9 @@ async function runLiveTest() {
   console.log('Public key from private key:', pubKey.toString())
 
   tx.sign(privKey)
-  console.log('Signed signatures count:', tx.transaction.signatures.length)
-  console.log('First signature (first 30 chars):', tx.transaction.signatures[0].slice(0, 30) + '...')
+  const trx = tx.transaction!
+  console.log('Signed signatures count:', trx.signatures.length)
+  console.log('First signature (first 30 chars):', trx.signatures[0].slice(0, 30) + '...')
 
   console.log('\nALL STEEM TESTS PASSED SUCCESSFULLY!')
 }
