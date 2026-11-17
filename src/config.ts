@@ -22,7 +22,7 @@ export const config: SteemConfig = {
     'https://api.steemit.com',
     'https://api.steemitdev.com',
     'https://api.steem.fans',
-    'https://steemapi.boylikegirl.club'
+    'https://api.moecki.online'
   ],
 
   /**
@@ -32,7 +32,7 @@ export const config: SteemConfig = {
     'https://api.steemit.com',
     'https://api.steemitdev.com',
     'https://api.steem.fans',
-    'https://steemapi.boylikegirl.club'
+    'https://api.moecki.online'
   ],
 
   /**

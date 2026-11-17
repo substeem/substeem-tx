@@ -574,8 +574,8 @@ export const coverageTests = async () => {
 
   await runTest('callRPC(condenser_api.get_accounts)', async () => {
     try {
-      const res = await callRPC('condenser_api.get_accounts', [['steemit']])
-      return res[0].name === 'steemit'
+      const res = await callRPC('condenser_api.get_accounts', [['substeem']])
+      return res[0].name === 'substeem'
     } catch {
       return false
     }
@@ -585,8 +585,8 @@ export const coverageTests = async () => {
     const temp = config.nodes
     try {
       config.nodes = ['https://bad-url-very-very-bad-url', 'https://another-bad-url', ...temp]
-      const res = await callRPC('condenser_api.get_accounts', [['steemit']])
-      return res[0].name === 'steemit'
+      const res = await callRPC('condenser_api.get_accounts', [['substeem']])
+      return res[0].name === 'substeem'
     } catch {
       return false
     } finally {
@@ -601,8 +601,8 @@ export const coverageTests = async () => {
 
   await runTest('callWithQuorum(condenser_api.get_accounts)', async () => {
     try {
-      const res = await callWithQuorum('condenser_api.get_accounts', [['steemit']])
-      return res[0].name === 'steemit'
+      const res = await callWithQuorum('condenser_api.get_accounts', [['substeem']])
+      return res[0].name === 'substeem'
     } catch {
       return false
     }
@@ -618,8 +618,8 @@ export const coverageTests = async () => {
         'https://another-bad-urlc',
         ...temp
       ]
-      const res = await callWithQuorum('condenser_api.get_accounts', [['steemit']])
-      return res[0].name === 'steemit'
+      const res = await callWithQuorum('condenser_api.get_accounts', [['substeem']])
+      return res[0].name === 'substeem'
     } catch {
       return false
     } finally {
