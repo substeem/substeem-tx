@@ -428,7 +428,7 @@ export const coverageTests = async () => {
   await runTest('utils.getVoteValue', async () => {
     const fund = await callRPC('condenser_api.get_reward_fund', ['post'])
     const price = await callRPC('condenser_api.get_current_median_history_price')
-    // a full vote: 2% of max mana minus dust, as a share of the pool, in HBD
+    // a full vote: 2% of max mana minus dust, as a share of the pool, in SBD
     const rshares = Math.ceil(chainMaxMana * 0.02) - 50_000_000
     const expected =
       ((rshares * utils.parseAsset(fund.reward_balance).amount) / Number(fund.recent_claims)) *
