@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <script type="module">
+    import { Transaction, PrivateKey, config, callRPC } from 'https://cdn.jsdelivr.net/npm/@substeem/steem-tx@1.0.0/dist/index.mjs'
+    window.steemTx = { Transaction, PrivateKey, config, callRPC }
+  </script>
+  <title>Test @substeem/steem-tx</title>
+</head>
+
+<body>
+  <h1>Steem-TX Browser Example</h1>
+  <script>
+    // Inspect dynamic global properties
+    window.onload = async () => {
+      try {
+        const props = await window.steemTx.callRPC('condenser_api.get_dynamic_global_properties', [])
+        console.log('Steem Head Block Number:', props.head_block_number)
+      } catch (err) {
+        console.error('Error fetching dynamic global properties:', err)
+      }
+    }
+  </script>
+</body>
+
+</html>

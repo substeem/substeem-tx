@@ -1,0 +1,80 @@
+{
+  "name": "@substeem/steem-tx",
+  "version": "1.0.0",
+  "description": "Lightweight and complete TypeScript SDK for Steem blockchain operations. Create, sign, and broadcast transactions with full type safety, cryptographic utilities, and serialization support.",
+  "author": "Substeem",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run format && tsdown",
+    "format": "prettier --write 'src/**/*.{js,ts}'",
+    "test": "npm run build && tsx tests/test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "steem",
+    "blockchain",
+    "transaction",
+    "sign",
+    "broadcast",
+    "crypto",
+    "web3",
+    "typescript",
+    "cryptocurrency",
+    "decentralized",
+    "dapp",
+    "wallet",
+    "substeem"
+  ],
+  "homepage": "https://github.com/substeem/substeem-tx",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/substeem/substeem-tx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/substeem/substeem-tx/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@noble/ciphers": "^2.4.0",
+    "@noble/curves": "^2.4.0",
+    "@noble/hashes": "^2.4.0",
+    "@tsconfig/node-lts": "^26.0.1",
+    "@types/node": "^26.6.6",
+    "prettier": "^3.10.1",
+    "tsdown": "^0.23.7",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "unrun": "^0.3.3"
+  },
+  "inlinedDependencies": {
+    "@noble/ciphers": "2.4.0",
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}
