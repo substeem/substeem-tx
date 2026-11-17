@@ -2,7 +2,7 @@ import { Asset } from './helpers/Asset.js'
 import { PublicKey } from './helpers/PublicKey.js'
 
 // Asset types
-export type AssetSymbol = 'HIVE' | 'HBD' | 'VESTS' | 'STEEM' | 'SBD' | 'TESTS' | 'TBD'
+export type AssetSymbol = 'STEEM' | 'SBD' | 'VESTS' | 'TESTS' | 'TBD'
 
 // Authority types
 export interface Authority {
@@ -27,7 +27,6 @@ export interface ChainProperties {
   account_creation_fee: Asset | string
   maximum_block_size: number
   sbd_interest_rate?: number
-  hbd_interest_rate?: number
 }
 
 // Witness Props
@@ -39,9 +38,7 @@ export interface WitnessProps {
   maximum_block_size?: number
   new_signing_key?: string | PublicKey | null
   sbd_exchange_rate?: Price
-  hbd_exchange_rate?: Price
   sbd_interest_rate?: number
-  hbd_interest_rate?: number
   url?: string
 }
 
@@ -181,8 +178,6 @@ export interface ClaimRewardBalanceOperation {
   account: string
   reward_steem?: Asset | string
   reward_sbd?: Asset | string
-  reward_hive?: Asset | string
-  reward_hbd?: Asset | string
   reward_vests: Asset | string
 }
 
@@ -201,8 +196,8 @@ export interface CommentOptionsOperation {
   author: string
   permlink: string
   max_accepted_payout: Asset | string
+  percent_steem_dollars?: number
   percent_sbd?: number
-  percent_hbd?: number
   allow_votes: boolean
   allow_curation_rewards: boolean
   extensions: Array<Array<Beneficiary>>
@@ -305,8 +300,6 @@ export interface EscrowTransferOperation {
   to: string
   sbd_amount?: Asset | string
   steem_amount?: Asset | string
-  hbd_amount?: Asset | string
-  hive_amount?: Asset | string
   escrow_id: number
   agent: string
   fee: Asset | string
@@ -332,8 +325,6 @@ export interface EscrowReleaseOperation {
   escrow_id: number
   sbd_amount?: Asset | string
   steem_amount?: Asset | string
-  hbd_amount?: Asset | string
-  hive_amount?: Asset | string
 }
 
 export interface EscrowApproveOperation {
@@ -486,14 +477,14 @@ export type VirtualOperationName =
   | 'producer_reward'
   | 'clear_null_account_balance'
   | 'proposal_pay'
-  | 'dhf_funding'
-  | 'hardfork_hive'
-  | 'hardfork_hive_restore'
+  | 'sps_fund'
+  | 'hardfork_steem'
+  | 'hardfork_steem_restore'
   | 'delayed_voting'
   | 'consolidate_treasury_balance'
   | 'effective_comment_vote'
   | 'ineffective_delete_comment'
-  | 'dhf_conversion'
+  | 'sps_convert'
   | 'expired_account_notification'
   | 'changed_recovery_account'
   | 'transfer_to_vesting_completed'

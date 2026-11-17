@@ -326,21 +326,21 @@ export const coverageTests = async () => {
     } catch {
       return (
         str.amount === 1.5 &&
-        (str.symbol === 'STEEM' || str.symbol === 'HIVE') &&
+        str.symbol === 'STEEM' &&
         nai.amount === 1.5 &&
-        (nai.symbol === 'SBD' || nai.symbol === 'HBD')
+        nai.symbol === 'SBD'
       )
     }
   })
 
-  await runTest('utils.vestsToHP and utils.hpToVests', async () => {
+  await runTest('utils.vestsToSP and utils.spToVests', async () => {
     const props = await callRPC('condenser_api.get_dynamic_global_properties')
-    const hp = await utils.vestsToHP(props.total_vesting_shares)
-    const fund = utils.parseAsset(props.total_vesting_fund_steem || props.total_vesting_fund_hive).amount
+    const sp = await utils.vestsToSP(props.total_vesting_shares)
+    const fund = utils.parseAsset(props.total_vesting_fund_steem).amount
     // the cached props may be a block apart from ours
     return (
-      Math.abs(hp / fund - 1) < 1e-4 &&
-      Math.abs((await utils.hpToVests(await utils.vestsToHP(1000))) - 1000) < 1e-9
+      Math.abs(sp / fund - 1) < 1e-4 &&
+      Math.abs((await utils.spToVests(await utils.vestsToSP(1000))) - 1000) < 1e-9
     )
   })
 
@@ -467,12 +467,12 @@ export const coverageTests = async () => {
   })
 
   await runTest('utils price, APR, and account value', async () => {
-    const sbd = await (utils.steemToSbd ? utils.steemToSbd(1) : utils.hiveToHbd(1))
-    const spApr = await (utils.getSpApr ? utils.getSpApr() : utils.getHpApr())
-    const sbdApr = await (utils.getSbdApr ? utils.getSbdApr() : utils.getHbdApr())
+    const sbd = await utils.steemToSbd(1)
+    const spApr = await utils.getSpApr()
+    const sbdApr = await utils.getSbdApr()
     return (
       sbd > 0 &&
-      Math.abs((await (utils.sbdToSteem ? utils.sbdToSteem(sbd) : utils.hbdToHive(sbd))) - 1) < 1e-12 &&
+      Math.abs((await utils.sbdToSteem(sbd)) - 1) < 1e-12 &&
       spApr > 0 &&
       spApr < 10 &&
       sbdApr >= 0 &&
@@ -499,9 +499,9 @@ export const coverageTests = async () => {
         'follow ["follow",{"follower":"a","following":"b","what":["unfollow_muted"]}]' &&
       json(utils.reblog('a', 'b', 'p')) ===
         'follow ["reblog",{"account":"a","author":"b","permlink":"p"}]' &&
-      json(utils.subscribe('a', 'hive-1')) === 'community ["subscribe",{"community":"hive-1"}]' &&
-      json(utils.unsubscribe('a', 'hive-1')) ===
-        'community ["unsubscribe",{"community":"hive-1"}]' &&
+      json(utils.subscribe('a', 'steem-1')) === 'community ["subscribe",{"community":"steem-1"}]' &&
+      json(utils.unsubscribe('a', 'steem-1')) ===
+        'community ["unsubscribe",{"community":"steem-1"}]' &&
       utils.follow('a', 'b')[1].required_posting_auths[0] === 'a'
     )
   })

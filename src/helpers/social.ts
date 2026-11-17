@@ -59,7 +59,7 @@ export const unfollowMuted = (follower: string, following: string) =>
 export const reblog = (account: string, author: string, permlink: string) =>
   customJson('follow', account, ['reblog', { account, author, permlink }])
 
-/** `account` subscribes to a community, e.g. `"hive-123456"` */
+/** `account` subscribes to a community, e.g. `"steem-101145"` */
 export const subscribe = (account: string, community: string) =>
   customJson('community', account, ['subscribe', { community }])
 

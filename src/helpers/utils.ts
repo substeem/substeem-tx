@@ -25,9 +25,7 @@ export interface WitnessProps {
   maximum_block_size?: number
   new_signing_key?: PublicKey | string | null
   sbd_exchange_rate?: { base: string; quote: string }
-  hbd_exchange_rate?: { base: string; quote: string }
   sbd_interest_rate?: number
-  hbd_interest_rate?: number
   url?: string
 }
 
@@ -137,8 +135,8 @@ export const operations = {
   clear_null_account_balance: 65,
   proposal_pay: 66,
   sps_fund: 67,
-  hardfork_hive: 68,
-  hardfork_hive_restore: 69,
+  hardfork_steem: 68,
+  hardfork_steem_restore: 69,
   delayed_voting: 70,
   consolidate_treasury_balance: 71,
   effective_comment_vote: 72,
@@ -205,14 +203,12 @@ export const buildWitnessSetProperties = (
         type = Serializer.UInt32
         break
       case 'sbd_interest_rate':
-      case 'hbd_interest_rate':
         type = Serializer.UInt16
         break
       case 'url':
         type = Serializer.String
         break
       case 'sbd_exchange_rate':
-      case 'hbd_exchange_rate':
         type = Serializer.Price
         break
       case 'account_creation_fee':

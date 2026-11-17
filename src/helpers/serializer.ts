@@ -178,19 +178,8 @@ const ArraySerializer = (itemSerializer: any) => {
 }
 
 const PROPERTY_ALIASES: Record<string, string[]> = {
-  percent_steem_dollars: ['percent_sbd', 'percent_hbd'],
-  percent_sbd: ['percent_steem_dollars', 'percent_hbd'],
-  percent_hbd: ['percent_steem_dollars', 'percent_sbd'],
-  sbd_interest_rate: ['hbd_interest_rate'],
-  hbd_interest_rate: ['sbd_interest_rate'],
-  reward_steem: ['reward_hive'],
-  reward_hive: ['reward_steem'],
-  reward_sbd: ['reward_hbd'],
-  reward_hbd: ['reward_sbd'],
-  sbd_amount: ['hbd_amount'],
-  hbd_amount: ['sbd_amount'],
-  steem_amount: ['hive_amount'],
-  hive_amount: ['steem_amount']
+  percent_steem_dollars: ['percent_sbd'],
+  percent_sbd: ['percent_steem_dollars']
 }
 
 const ObjectSerializer = (keySerializers: any) => {

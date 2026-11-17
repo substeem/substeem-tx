@@ -41,8 +41,6 @@ export interface WalletAccount extends StakeAccount {
   savings_balance: AssetInput
   sbd_balance?: AssetInput
   savings_sbd_balance?: AssetInput
-  hbd_balance?: AssetInput
-  savings_hbd_balance?: AssetInput
 }
 
 /** Account name, or an account object from `get_accounts` / `find_accounts` */
@@ -114,28 +112,24 @@ const medianPrice = async (): Promise<number> => {
 /** Converts STEEM to SBD at the median price feed */
 export const steemToSbd = async (steem: number | AssetInput): Promise<number> =>
   amountOf(steem) * (await medianPrice())
-export const hiveToHbd = steemToSbd
 
 /** Converts SBD to STEEM at the median price feed */
 export const sbdToSteem = async (sbd: number | AssetInput): Promise<number> =>
   amountOf(sbd) / (await medianPrice())
-export const hbdToHive = sbdToSteem
 
 /** Converts VESTS to STEEM Power at the current rate */
 export const vestsToSP = async (vests: number | AssetInput): Promise<number> => {
   const props = await cachedRPC('condenser_api.get_dynamic_global_properties')
-  const totalFund = props.total_vesting_fund_steem || props.total_vesting_fund_hive
+  const totalFund = props.total_vesting_fund_steem
   return (amountOf(vests) * amountOf(totalFund)) / amountOf(props.total_vesting_shares)
 }
-export const vestsToHP = vestsToSP
 
 /** Converts STEEM Power to VESTS at the current rate */
 export const spToVests = async (sp: number | AssetInput): Promise<number> => {
   const props = await cachedRPC('condenser_api.get_dynamic_global_properties')
-  const totalFund = props.total_vesting_fund_steem || props.total_vesting_fund_hive
+  const totalFund = props.total_vesting_fund_steem
   return (amountOf(sp) * amountOf(props.total_vesting_shares)) / amountOf(totalFund)
 }
-export const hpToVests = spToVests
 
 const effectiveVests = (account: StakeAccount): number => {
   // to_withdraw and withdrawn are in micro-VESTS
@@ -214,7 +208,6 @@ export const rsharesToSBD = async (rshares: number): Promise<number> => {
   ])
   return ((rshares * amountOf(fund.reward_balance)) / Number(fund.recent_claims)) * price
 }
-export const rsharesToHBD = rsharesToSBD
 
 /** Estimated SBD value of a vote, author and curation rewards combined */
 export const getVoteValue = async (account: AccountInput, weight = 10000): Promise<number> =>
@@ -227,22 +220,19 @@ export const getSpApr = async (): Promise<number> => {
     medianPrice()
   ])
   const inflation = Math.max(978 - Math.floor(props.head_block_number / 250_000), 95) / 10000
-  const sbdSupply = props.current_sbd_supply || props.current_hbd_supply
+  const sbdSupply = props.current_sbd_supply
   const supply = amountOf(props.current_supply) + amountOf(sbdSupply) / price
   const yearlyVestingReward = (supply * inflation * (props.vesting_reward_percent || 1500)) / 10000
-  const totalFund = props.total_vesting_fund_steem || props.total_vesting_fund_hive
+  const totalFund = props.total_vesting_fund_steem
   return (yearlyVestingReward / amountOf(totalFund)) * 100
 }
-export const getHpApr = getSpApr
 
 /** Yearly interest on SBD in savings, in percent */
 export const getSbdApr = async (): Promise<number> => {
   const props = await cachedRPC('condenser_api.get_dynamic_global_properties')
-  const rate =
-    props.sbd_interest_rate !== undefined ? props.sbd_interest_rate : props.hbd_interest_rate || 0
+  const rate = props.sbd_interest_rate || 0
   return rate / 100
 }
-export const getHbdApr = getSbdApr
 
 /**
  * Estimated account value in SBD at the median price: liquid, savings, STEEM Power
@@ -259,13 +249,12 @@ export const estimateAccountValue = async (account: string | WalletAccount): Pro
     medianPrice()
   ])
   let steem = amountOf(acc.balance) + amountOf(acc.savings_balance) + sp
-  const sbdBal = acc.sbd_balance !== undefined ? acc.sbd_balance : acc.hbd_balance || 0
-  const savingsSbd =
-    acc.savings_sbd_balance !== undefined ? acc.savings_sbd_balance : acc.savings_hbd_balance || 0
+  const sbdBal = acc.sbd_balance || 0
+  const savingsSbd = acc.savings_sbd_balance || 0
   let sbd = amountOf(sbdBal) + amountOf(savingsSbd)
   for (const order of orders) {
     const sym = parseAsset(order.sell_price.base).symbol
-    if (sym === 'STEEM' || sym === 'HIVE') steem += order.for_sale / 1000
+    if (sym === 'STEEM') steem += order.for_sale / 1000
     else sbd += order.for_sale / 1000
   }
   return sbd + steem * price
