@@ -29,7 +29,7 @@ async function runLiveTest() {
     [
       'vote',
       {
-        voter: 'substeem',
+        voter: 'substeem.app',
         author: 'steemit',
         permlink: 'firstpost',
         weight: 10000

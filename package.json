@@ -46,7 +46,7 @@
     "wallet",
     "substeem"
   ],
-  "homepage": "https://github.com/substeem/substeem-tx",
+  "homepage": "https://substeem.org",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/substeem/substeem-tx.git"

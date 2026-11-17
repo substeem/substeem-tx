@@ -4,7 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-blue.svg)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-green.svg)](https://nodejs.org/)
 
-Lightweight and complete modern TypeScript SDK for the **Steem** blockchain.
+Lightweight and complete modern TypeScript SDK for the **Steem** blockchain, maintained by [Substeem](https://substeem.org) ([@substeem.app](https://steemit.com/@substeem.app)).
 Zero runtime dependencies, ~35 KB gzipped. Works in Node.js, modern browsers, Chrome Manifest V3 extensions, workers, and serverless runtimes.
 
 - **Zero Runtime Dependencies**: Noble cryptography (`@noble/curves`, `@noble/hashes`, `@noble/ciphers`) is compiled and inlined.
@@ -45,7 +45,7 @@ await tx.create([
   [
     'vote',
     {
-      voter: 'substeem',
+      voter: 'substeem.app',
       author: 'steemit',
       permlink: 'firstpost',
       weight: 10000
@@ -74,7 +74,7 @@ const sp = await utils.vestsToSP(1_000_000)
 console.log('SP:', sp)
 
 // Calculate Voting Mana
-const mana = await utils.getVotingMana('substeem')
+const mana = await utils.getVotingMana('substeem.app')
 console.log('Voting Power %:', mana.percentage)
 ```
 
