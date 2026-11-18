@@ -151,7 +151,7 @@ const encodeForAccount = async (
  *
  * @example
  * ```typescript
- * import { Memo, PrivateKey, PublicKey } from '@substeem/steem-tx'
+ * import { Memo, PrivateKey, PublicKey } from '@substeem/steem-sdk'
  *
  * // Encrypt a message
  * const encrypted = Memo.encode(senderPrivateKey, recipientPublicKey, '#Hello World')

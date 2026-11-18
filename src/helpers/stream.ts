@@ -59,7 +59,7 @@ async function* followChain<T>(
  *
  * @example
  * ```typescript
- * import { streamBlockNumbers } from '@substeem/steem-tx'
+ * import { streamBlockNumbers } from '@substeem/steem-sdk'
  *
  * for await (const num of streamBlockNumbers()) {
  *   console.log(num)
@@ -82,7 +82,7 @@ export async function* streamBlockNumbers(options: StreamOptions = {}): AsyncGen
  *
  * @example
  * ```typescript
- * import { streamBlocks } from '@substeem/steem-tx'
+ * import { streamBlocks } from '@substeem/steem-sdk'
  *
  * for await (const block of streamBlocks()) {
  *   console.log(block.block_num, block.transactions.length)
@@ -109,7 +109,7 @@ export async function* streamBlocks(options: StreamOptions = {}): AsyncGenerator
  *
  * @example
  * ```typescript
- * import { streamOperations } from '@substeem/steem-tx'
+ * import { streamOperations } from '@substeem/steem-sdk'
  *
  * for await (const { block, trx_id, op } of streamOperations()) {
  *   if (op[0] === 'transfer') console.log(block, trx_id, op[1].from, op[1].amount)

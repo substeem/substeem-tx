@@ -1,4 +1,4 @@
-# @substeem/steem-tx
+# @substeem/steem-sdk
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-blue.svg)](https://www.typescriptlang.org/)
@@ -19,7 +19,7 @@ Zero runtime dependencies, ~35 KB gzipped. Works in Node.js, modern browsers, Ch
 ## Installation
 
 ```bash
-npm install @substeem/steem-tx
+npm install @substeem/steem-sdk
 ```
 
 ---
@@ -28,7 +28,7 @@ npm install @substeem/steem-tx
 
 ### 1. Simple RPC Call
 ```typescript
-import { call } from '@substeem/steem-tx'
+import { call } from '@substeem/steem-sdk'
 
 const props = await call('condenser_api.get_dynamic_global_properties')
 console.log('Head block:', props.head_block_number)
@@ -36,7 +36,7 @@ console.log('Head block:', props.head_block_number)
 
 ### 2. Create, Sign & Broadcast a Transaction
 ```typescript
-import { Transaction, PrivateKey } from '@substeem/steem-tx'
+import { Transaction, PrivateKey } from '@substeem/steem-sdk'
 
 const tx = new Transaction()
 
@@ -67,7 +67,7 @@ console.log('Transaction confirmed! ID:', result.tx_id, 'Block:', result.block_n
 
 ### 3. Steem Power and Mana Utilities
 ```typescript
-import { utils } from '@substeem/steem-tx'
+import { utils } from '@substeem/steem-sdk'
 
 // Convert VESTS to STEEM Power
 const sp = await utils.vestsToSP(1_000_000)

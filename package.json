@@ -1,5 +1,5 @@
 {
-  "name": "@substeem/steem-tx",
+  "name": "@substeem/steem-sdk",
   "version": "1.0.0",
   "description": "Lightweight and complete TypeScript SDK for Steem blockchain operations. Create, sign, and broadcast transactions with full type safety, cryptographic utilities, and serialization support.",
   "author": "Substeem",
@@ -49,10 +49,10 @@
   "homepage": "https://substeem.org",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/substeem/substeem-tx.git"
+    "url": "git+https://github.com/substeem/steem-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/substeem/substeem-tx/issues"
+    "url": "https://github.com/substeem/steem-sdk/issues"
   },
   "engines": {
     "node": ">=20"

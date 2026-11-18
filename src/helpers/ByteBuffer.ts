@@ -4,7 +4,7 @@
  * Released under the Apache License, Version 2.0
  * see: https://github.com/dcodeIO/bytebuffer.ts for details
  * modified by @xmcl/bytebuffer
- * And customized for steem-tx
+ * And customized for steem-sdk
  */
 
 const EMPTY_BUFFER = new ArrayBuffer(0)

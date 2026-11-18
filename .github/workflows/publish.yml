@@ -45,7 +45,7 @@ jobs:
       - name: Create GitHub Release Assets
         uses: actions/upload-artifact@v5
         with:
-          name: steem-tx-${{ steps.version.outputs.version }}
+          name: steem-sdk-${{ steps.version.outputs.version }}
           path: |
             dist/
             README.md

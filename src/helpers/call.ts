@@ -147,7 +147,7 @@ const withRPCFailover = async <T>(request: (node: string) => Promise<T>, retry: 
  *
  * @example
  * ```typescript
- * import { callRPC } from '@substeem/steem-tx'
+ * import { callRPC } from '@substeem/steem-sdk'
  *
  * // Get account information
  * const accounts = await callRPC('condenser_api.get_accounts', [['alice']])
@@ -176,7 +176,7 @@ export const call = callRPC
  *
  * @example
  * ```typescript
- * import { callRPCBatch } from '@substeem/steem-tx'
+ * import { callRPCBatch } from '@substeem/steem-sdk'
  *
  * const [first, second] = await callRPCBatch('condenser_api.get_block', [[1], [2]])
  * ```

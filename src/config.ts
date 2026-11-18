@@ -1,5 +1,5 @@
 /**
- * Configuration object for customizing steem-tx library behavior.
+ * Configuration object for customizing steem-sdk library behavior.
  * Modify these values to change the default node endpoints, timeout, and other settings.
  */
 interface SteemConfig {
